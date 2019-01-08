@@ -56,4 +56,13 @@ public class MainActivity extends AppCompatActivity {
         this.displayValue = result.toString();
         updateView();
     }
+
+    public void delete(View view) {
+        if(this.displayValue.length() < 1){
+            return;
+        }
+        Integer index = this.displayValue.length();
+        this.displayValue = this.displayValue.substring(0, index - 1);
+        updateView();
+    }
 }

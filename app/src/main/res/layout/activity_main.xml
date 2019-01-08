@@ -173,7 +173,7 @@
                 style="@style/button"
                 android:id="@+id/buttonSuppr"
                 android:text="sup"
-                android:onClick="inputClick"
+                android:onClick="delete"
                 app:layout_constraintHeight_percent="0.25"
                 app:layout_constraintStart_toEndOf="@id/button0"
                 app:layout_constraintEnd_toEndOf="parent"
