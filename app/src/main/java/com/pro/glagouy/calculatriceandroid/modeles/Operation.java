@@ -1,17 +1,17 @@
 package com.pro.glagouy.calculatriceandroid.modeles;
 
 public class Operation {
-    private double val1;
-    private double val2;
+    private Double val1;
+    private Double val2;
     private String operator;
 
-    public Operation(double val1, double val2, String operator){
+    public Operation(Double val1, Double val2, String operator){
         this.val1 = val1;
         this.val2 = val2;
         this.operator = operator;
     }
 
-    public double calculate(){
+    public Double calculate(){
         switch (operator){
             case "/":
                 return val1 / val2;
@@ -22,6 +22,6 @@ public class Operation {
             case "+":
                 return val1 + val2;
         }
-        return 0;
+        return 0.0;
     }
 }

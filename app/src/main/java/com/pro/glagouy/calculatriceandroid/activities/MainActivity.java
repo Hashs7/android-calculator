@@ -6,11 +6,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.pro.glagouy.calculatriceandroid.R;
+import com.pro.glagouy.calculatriceandroid.modeles.Operation;
 
 public class MainActivity extends AppCompatActivity {
     private String viewValue = "";
-    private double value1;
-    private double value2;
+    private Integer value1;
+    private Integer value2;
     private TextView textView;
 
     @Override
@@ -32,22 +33,25 @@ public class MainActivity extends AppCompatActivity {
      * @param view la vue qui a déclenchée l'event
      */
     public void numberClick(View view) {
-        int valuePress = Integer.parseInt(view.getTag().toString());
+        String valuePress = view.getTag().toString();
         this.viewValue += valuePress;
         updateView();
     }
 
-    /**
-     *  HandleOperationClick
-     * @param view la vue qui a déclenchée l'event
-     */
-    public void operationClick(View view) {
-        this.value1 = Double.parseDouble(this.viewValue);
+
+    public void calculate(View view) {
+        String operator = view.getTag().toString();
+
+        String[] values = this.viewValue.split(operator);
+        this.value1 = Integer.parseInt(values[0]);
+        this.value2 = Integer.parseInt(values[1]);
+
 
         String valuePress = (String) view.getTag();
-        System.out.println(valuePress);
+        System.out.println(valuePress +"value 1: "+ this.value1 + "  value 2:" + this.value2);
         this.viewValue += valuePress;
 
-        updateView();
+        Operation result = new Operation((double) this.value1, (double) this.value2, operator);
+        System.out.println(result);
     }
 }
