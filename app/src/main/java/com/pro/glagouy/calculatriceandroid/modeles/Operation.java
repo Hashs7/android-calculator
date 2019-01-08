@@ -1,4 +1,4 @@
-package com.pro.glagouy.calculatriceandroid;
+package com.pro.glagouy.calculatriceandroid.modeles;
 
 public class Operation {
     private double val1;
