@@ -9,10 +9,11 @@ import com.pro.glagouy.calculatriceandroid.R;
 import com.pro.glagouy.calculatriceandroid.modeles.Operation;
 
 public class MainActivity extends AppCompatActivity {
-    private String viewValue = "";
+    private String displayValue = "";
     private Integer value1;
     private Integer value2;
     private TextView textView;
+    private String operator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,33 +26,34 @@ public class MainActivity extends AppCompatActivity {
      * UpdateTextView values
      */
     private void updateView() {
-        this.textView.setText(this.viewValue);
+        this.textView.setText(this.displayValue);
     }
 
     /**
      *  HandleButtonClick
      * @param view la vue qui a déclenchée l'event
      */
-    public void numberClick(View view) {
+    public void inputClick(View view) {
         String valuePress = view.getTag().toString();
-        this.viewValue += valuePress;
+        this.displayValue += valuePress;
         updateView();
     }
 
+    public void operatorClick(View view){
+        this.operator = view.getTag().toString();
+        inputClick(view);
+    }
 
     public void calculate(View view) {
-        String operator = view.getTag().toString();
-
-        String[] values = this.viewValue.split(operator);
+        String[] values = this.displayValue.split("\\" + this.operator);
         this.value1 = Integer.parseInt(values[0]);
         this.value2 = Integer.parseInt(values[1]);
 
-
         String valuePress = (String) view.getTag();
-        System.out.println(valuePress +"value 1: "+ this.value1 + "  value 2:" + this.value2);
-        this.viewValue += valuePress;
+        this.displayValue += valuePress;
 
-        Operation result = new Operation((double) this.value1, (double) this.value2, operator);
-        System.out.println(result);
+        Integer result = new Operation(this.value1, this.value2, operator).calculate();
+        this.displayValue = result.toString();
+        updateView();
     }
 }
