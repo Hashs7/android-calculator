@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void calculate(View view) {
-        String[] values = this.displayValue.split("\\" + this.operator);
+        String[] values = this.displayValue.split(String.format("\\%s", this.operator));
         this.value1 = Integer.parseInt(values[0]);
         this.value2 = Integer.parseInt(values[1]);
 
