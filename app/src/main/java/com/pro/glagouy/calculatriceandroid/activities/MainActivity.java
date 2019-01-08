@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pro.glagouy.calculatriceandroid.R;
 import com.pro.glagouy.calculatriceandroid.modeles.Operation;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * UpdateTextView values
+     * Update TextView values
      */
     private void updateView() {
         this.textView.setText(this.displayValue);
@@ -49,12 +50,14 @@ public class MainActivity extends AppCompatActivity {
         this.value1 = Integer.parseInt(values[0]);
         this.value2 = Integer.parseInt(values[1]);
 
-        String valuePress = (String) view.getTag();
-        this.displayValue += valuePress;
-
-        Integer result = new Operation(this.value1, this.value2, operator).calculate();
-        this.displayValue = result.toString();
-        updateView();
+        Integer result;
+        try {
+            result = new Operation(this.value1, this.value2, operator).calculate();
+            this.displayValue = result.toString();
+            updateView();
+        } catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void delete(View view) {
