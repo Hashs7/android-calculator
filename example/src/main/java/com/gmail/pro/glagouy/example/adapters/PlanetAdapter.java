@@ -6,10 +6,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gmail.pro.glagouy.example.R;
 import com.gmail.pro.glagouy.example.modeles.Planet;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -41,16 +43,19 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.MyViewHold
     static class MyViewHolder extends RecyclerView.ViewHolder{
         TextView mTitle;
         TextView mDescription;
+        ImageView mImage;
 
         MyViewHolder(View v) {
             super(v);
             mTitle = v.findViewById(R.id.tv_planetTitle);
             mDescription = v.findViewById(R.id.tv_planetDesc);
+            mImage = v.findViewById(R.id.iv_planetImg);
         }
 
         void bindItem(Planet planet){
             mTitle.setText(planet.getName());
             mDescription.setText(planet.getDescription());
+            Picasso.get().load(planet.getImage()).into(mImage);
         }
     }
 }
