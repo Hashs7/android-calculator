@@ -1,15 +1,8 @@
 package com.gmail.pro.glagouy.example.activities;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
+
 
 import com.gmail.pro.glagouy.example.R;
 import com.gmail.pro.glagouy.example.adapters.MyAdapter;
@@ -18,6 +11,10 @@ import com.gmail.pro.glagouy.example.modeles.Planet;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
 
