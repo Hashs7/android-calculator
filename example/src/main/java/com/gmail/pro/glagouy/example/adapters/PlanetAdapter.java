@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.gmail.pro.glagouy.example.R;
 import com.gmail.pro.glagouy.example.activities.PlanetActivity;
+import com.gmail.pro.glagouy.example.listeners.PlanetListener;
 import com.gmail.pro.glagouy.example.modeles.Planet;
 import com.squareup.picasso.Picasso;
 
@@ -20,9 +21,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.MyViewHolder>  {
     private ArrayList<Planet> planetes;
+    PlanetListener listener;
 
-    public PlanetAdapter(ArrayList<Planet> planetes){
+    public PlanetAdapter(ArrayList<Planet> planetes, PlanetListener listener){
         this.planetes = planetes;
+        this.listener = listener;
     }
 
     @NonNull
@@ -43,10 +46,11 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.MyViewHold
         return planetes.size();
     }
 
-    static class MyViewHolder extends RecyclerView.ViewHolder{
+    class MyViewHolder extends RecyclerView.ViewHolder{
         TextView mTitle;
         TextView mDescription;
         ImageView mImage;
+        ImageView mShare;
         View v;
 
         MyViewHolder(View v) {
@@ -55,6 +59,7 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.MyViewHold
             mTitle = v.findViewById(R.id.tv_planetTitle);
             mDescription = v.findViewById(R.id.tv_planetDesc);
             mImage = v.findViewById(R.id.iv_planetImg);
+            mShare = v.findViewById(R.id.share);
         }
 
         void bindItem(final Planet planet){
@@ -65,13 +70,17 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.MyViewHold
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), PlanetActivity.class);
-                    intent.putExtra("title", planet.getName());
-                    intent.putExtra("desc", planet.getDescription());
-                    intent.putExtra("img", planet.getImage());
-                    v.getContext().startActivity(intent);
+                    listener.onSelect(planet);
                 }
             });
+
+            mShare.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onShare(planet);
+                }
+            });
+
         }
     }
 }

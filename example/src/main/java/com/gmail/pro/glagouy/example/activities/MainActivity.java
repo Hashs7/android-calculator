@@ -1,12 +1,15 @@
 package com.gmail.pro.glagouy.example.activities;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 
 import com.gmail.pro.glagouy.example.R;
 import com.gmail.pro.glagouy.example.adapters.MyAdapter;
 import com.gmail.pro.glagouy.example.adapters.PlanetAdapter;
+import com.gmail.pro.glagouy.example.listeners.PlanetListener;
 import com.gmail.pro.glagouy.example.modeles.Planet;
 
 import java.util.ArrayList;
@@ -16,7 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements PlanetListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.list_planet);
 
-        PlanetAdapter adapter = new PlanetAdapter(planets);
+        PlanetAdapter adapter = new PlanetAdapter(planets, this);
 
         GridLayoutManager manager = new GridLayoutManager(this, 1);
 
@@ -52,4 +55,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onSelect(Planet planet) {
+        Intent intent = new Intent(this, PlanetActivity.class);
+        intent.putExtra("title", planet.getName());
+        intent.putExtra("desc", planet.getDescription());
+        intent.putExtra("img", planet.getImage());
+        startActivity(intent);
+    }
+
+    @Override
+    public void onShare(Planet planet) {
+        Toast.makeText(this, "Toast", Toast.LENGTH_SHORT).show();
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, planet.getImage());
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
+    }
 }
