@@ -1,6 +1,5 @@
 package com.pro.glagouy.calculatriceandroid.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -8,6 +7,8 @@ import android.widget.Toast;
 
 import com.pro.glagouy.calculatriceandroid.R;
 import com.pro.glagouy.calculatriceandroid.modeles.Operation;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     private String displayValue = "";
