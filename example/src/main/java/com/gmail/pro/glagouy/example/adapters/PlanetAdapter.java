@@ -1,6 +1,7 @@
 package com.gmail.pro.glagouy.example.adapters;
 
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gmail.pro.glagouy.example.R;
+import com.gmail.pro.glagouy.example.activities.PlanetActivity;
 import com.gmail.pro.glagouy.example.modeles.Planet;
 import com.squareup.picasso.Picasso;
 
@@ -44,18 +46,31 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.MyViewHold
         TextView mTitle;
         TextView mDescription;
         ImageView mImage;
+        View v;
 
         MyViewHolder(View v) {
             super(v);
+            this.v = v;
             mTitle = v.findViewById(R.id.tv_planetTitle);
             mDescription = v.findViewById(R.id.tv_planetDesc);
             mImage = v.findViewById(R.id.iv_planetImg);
         }
 
-        void bindItem(Planet planet){
+        void bindItem(final Planet planet){
             mTitle.setText(planet.getName());
             mDescription.setText(planet.getDescription());
             Picasso.get().load(planet.getImage()).into(mImage);
+
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), PlanetActivity.class);
+                    intent.putExtra("title", planet.getName());
+                    intent.putExtra("desc", planet.getDescription());
+                    intent.putExtra("img", planet.getImage());
+                    v.getContext().startActivity(intent);
+                }
+            });
         }
     }
 }
