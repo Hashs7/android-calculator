@@ -2,8 +2,6 @@ package com.gmail.pro.glagouy.example.adapters;
 
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +14,9 @@ import com.gmail.pro.glagouy.example.modeles.Planet;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.MyViewHolder>  {
     private ArrayList<Planet> planetes;
@@ -33,7 +34,7 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position){
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position){
         holder.bindItem(planetes.get(position));
     }
 

@@ -1,14 +1,14 @@
 package com.gmail.pro.glagouy.example.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.menu.MenuView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gmail.pro.glagouy.example.R;
 import com.squareup.picasso.Picasso;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class PlanetActivity extends AppCompatActivity {
 
