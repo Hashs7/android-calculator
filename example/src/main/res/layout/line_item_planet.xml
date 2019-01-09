@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     app:cardCornerRadius="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        android:padding="20dp">
 
 
         <TextView
             android:id="@+id/tv_planetTitle"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:textSize="25sp"
-            tools:text="PLANET TITLE"/>
+            tools:text="PLANET TITLE" />
 
         <ImageView
             android:id="@+id/iv_planetImg"
@@ -32,6 +33,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/iv_planetImg"
-            tools:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos ea exercitationem, laudantium libero placeat quaerat quis repudiandae rerum. "/>
+            tools:text="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos ea exercitationem, laudantium libero placeat quaerat quis repudiandae rerum. " />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Share"
+            android:src="@drawable/ic_share_black_24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_planetDesc" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
