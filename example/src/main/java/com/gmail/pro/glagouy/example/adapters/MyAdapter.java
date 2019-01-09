@@ -16,7 +16,7 @@ public class MyAdapter extends ArrayAdapter<String> {
     private final String[] values;
 
     public MyAdapter(Context context, String[] values) {
-        super(context, R.layout.line_item, values);
+        super(context, R.layout.line_item, R.id.tv_planete, values);
         this.context = context;
         this.values  = values;
     }
@@ -27,10 +27,10 @@ public class MyAdapter extends ArrayAdapter<String> {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.line_item, parent, false);
-        TextView textView = rowView.findViewById(R.id.label);
-        ImageView imageView = rowView.findViewById(R.id.icon);
+        TextView textView = rowView.findViewById(R.id.tv_planete);
+        ImageView imageView = rowView.findViewById(R.id.iv_planete);
         textView.setText(values[position]);
-        imageView.setImageResource(R.drawable.icon);
+        imageView.setImageResource(R.drawable.ic_launcher_background);
 
         return rowView;
     }

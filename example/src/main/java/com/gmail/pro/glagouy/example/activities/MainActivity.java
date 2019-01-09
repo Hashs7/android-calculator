@@ -6,6 +6,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
 import com.gmail.pro.glagouy.example.R;
+import com.gmail.pro.glagouy.example.adapters.MyAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,23 +18,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        List<String> planetes = new ArrayList<>();
-        planetes.add("MERCURE");
-        planetes.add("VENUS");
-        planetes.add("TERRE");
-        planetes.add("MARS");
-        planetes.add("JUPITER");
-        planetes.add("SATURNE");
-        planetes.add("URANUS");
-        planetes.add("NEPTUNE");
-
         Spinner sp = (Spinner) findViewById(R.id.spinner1);
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, planetes);
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sp.setAdapter(dataAdapter);
+        String[] planetes = getResources().getStringArray(R.array.planetesArray);
+
+        ArrayAdapter<String> dataAdapter = new MyAdapter(this, planetes);
+        dataAdapter.setDropDownViewResource(R.layout.line_item);
+        sp.setAdapter(new MyAdapter(this, planetes));
 
     }
-
-
-
 }
