@@ -40,11 +40,19 @@ public class MainActivity extends AppCompatActivity {
         updateView();
     }
 
+    /**
+     *
+     * @param view
+     */
     public void operatorClick(View view){
         this.operator = view.getTag().toString();
         inputClick(view);
     }
 
+    /**
+     *
+     * @param view
+     */
     public void calculate(View view) {
         String[] values = this.displayValue.split(String.format("\\%s", this.operator));
         this.value1 = Integer.parseInt(values[0]);
@@ -60,6 +68,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     *
+     * @param view
+     */
     public void delete(View view) {
         if(this.displayValue.length() < 1){
             return;
