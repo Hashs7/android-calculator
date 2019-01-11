@@ -14,6 +14,7 @@ import com.gmail.pro.glagouy.news.models.News;
 import com.gmail.pro.glagouy.news.models.NewsList;
 import com.gmail.pro.glagouy.news.networks.NewsService;
 import com.gmail.pro.glagouy.news.utils.Constants;
+import com.gmail.pro.glagouy.news.viewmodels.NewsViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,8 @@ import java.util.concurrent.Callable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
@@ -39,52 +42,39 @@ public class NewsFragment extends Fragment{
     RecyclerView recyclerView;
     NewsAdapter adapter;
     NewsDatabase db;
+    private NewsViewModel model;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addNews();
+        model = ViewModelProviders.of(this).get(NewsViewModel.class);
+
+        /*
+        newsViewModel.getNews();
 
         if(isNetworkConnected()){
-            addNews();
+            newsViewModel.getNews();
         } else {
             getNewsFromDb();
-        }
+        }*/
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.recycler, container, false);
-        setNews(rootView) ;
+        setNews(rootView);
         return rootView;
     }
 
-    private void addNews(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(Constants.getUrl())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        NewsService service = retrofit.create(NewsService.class);
-
-        final Call<NewsList> news = service.listNews("design", Constants.getApiKey());
-        news.enqueue(new Callback<NewsList>() {
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        model.getNews().observe(this, new Observer<List<News>>() {
             @Override
-            public void onResponse(@NonNull Call<NewsList> call, @NonNull Response<NewsList> response) {
-                NewsList responseBody = response.body();
-                if(responseBody != null){
-                    newsList = responseBody.getArticles();
-                    //pour gérer l'asynchrone !
-                    adapter.notifyDataSetChanged();
-                    adapter.setNews(newsList);
-                    saveNews(newsList);
-                }
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<NewsList> call, @NonNull Throwable t) {
-                System.out.println("Fail");
+            public void onChanged(List<News> news) {
+                adapter.setNews(news);
+                adapter.notifyDataSetChanged();
             }
         });
     }

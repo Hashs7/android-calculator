@@ -42,4 +42,9 @@ dependencies {
     implementation 'androidx.room:room-runtime:2.0.0'
     annotationProcessor 'androidx.room:room-compiler:2.0.0'
     implementation "com.parse.bolts:bolts-tasks:1.4.0"
+
+    def lifecycle_version = "2.0.0"
+    //View model and live data
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 }
