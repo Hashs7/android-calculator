@@ -1,76 +1,77 @@
 package com.gmail.pro.glagouy.example.activities;
 
-
-import android.content.Intent;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.widget.Toast;
-
+import android.view.View;
 
 import com.gmail.pro.glagouy.example.R;
-import com.gmail.pro.glagouy.example.adapters.MyAdapter;
-import com.gmail.pro.glagouy.example.adapters.PlanetAdapter;
-import com.gmail.pro.glagouy.example.listeners.PlanetListener;
-import com.gmail.pro.glagouy.example.modeles.Planet;
+import com.gmail.pro.glagouy.example.fragments.PlanetsFragment;
+import com.gmail.pro.glagouy.example.modeles.Repo;
+import com.gmail.pro.glagouy.example.networks.ArticleService;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.FragmentTransaction;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity implements PlanetListener {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.recycler);
 
-        ArrayList<Planet> planets = new ArrayList<>();
-        planets.add(new Planet("Planet 1", "Blanditiis voluptates veniam iusto qui sapiente ipsam fuga eum. Eos quos sit et alias autem qui maxime. Distinctio saepe quae esse sit hic. Voluptatibus soluta ut modi est tempora enim.", "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1652&q=80"));
-        planets.add(new Planet("Planet 2", "Blanditiis voluptates veniam iusto qui sapiente ipsam fuga eum. Eos quos sit et alias autem qui maxime. Distinctio saepe quae esse sit hic. Voluptatibus soluta ut modi est tempora enim.", "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1652&q=80"));
-        planets.add(new Planet("Planet 3", "Blanditiis voluptates veniam iusto qui sapiente ipsam fuga eum. Eos quos sit et alias autem qui maxime. Distinctio saepe quae esse sit hic. Voluptatibus soluta ut modi est tempora enim.", "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1652&q=80"));
-        planets.add(new Planet("Planet 4", "Blanditiis voluptates veniam iusto qui sapiente ipsam fuga eum. Eos quos sit et alias autem qui maxime. Distinctio saepe quae esse sit hic. Voluptatibus soluta ut modi est tempora enim.", "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1652&q=80"));
-        planets.add(new Planet("Planet 5", "Blanditiis voluptates veniam iusto qui sapiente ipsam fuga eum. Eos quos sit et alias autem qui maxime. Distinctio saepe quae esse sit hic. Voluptatibus soluta ut modi est tempora enim.", "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1652&q=80"));
-        planets.add(new Planet("Planet 6", "Blanditiis voluptates veniam iusto qui sapiente ipsam fuga eum. Eos quos sit et alias autem qui maxime. Distinctio saepe quae esse sit hic. Voluptatibus soluta ut modi est tempora enim.", "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1652&q=80"));
-        planets.add(new Planet("Planet 7", "Blanditiis voluptates veniam iusto qui sapiente ipsam fuga eum. Eos quos sit et alias autem qui maxime. Distinctio saepe quae esse sit hic. Voluptatibus soluta ut modi est tempora enim.", "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1652&q=80"));
-        planets.add(new Planet("Planet 8", "Blanditiis voluptates veniam iusto qui sapiente ipsam fuga eum. Eos quos sit et alias autem qui maxime. Distinctio saepe quae esse sit hic. Voluptatibus soluta ut modi est tempora enim.", "https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1652&q=80"));
+        setContentView(R.layout.main_activity);
 
-        RecyclerView recyclerView = findViewById(R.id.list_planet);
+        PlanetsFragment fragment = new PlanetsFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
-        PlanetAdapter adapter = new PlanetAdapter(planets, this);
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.addToBackStack(null);
 
-        GridLayoutManager manager = new GridLayoutManager(this, 1);
+        transaction.commit();
 
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(adapter);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://api.github.com/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-        /*Spinner sp = (Spinner) findViewById(R.id.spinner1);
-        String[] planetes = getResources().getStringArray(R.array.planetesArray);
+        ArticleService service = retrofit.create(ArticleService.class);
 
-        ArrayAdapter<String> dataAdapter = new MyAdapter(this, planetes);
-        dataAdapter.setDropDownViewResource(R.layout.line_item);
-        sp.setAdapter(new MyAdapter(this, planetes));*/
+        Call<List<Repo>> repos = service.listRepos("GuillaumeLagouy");
+        repos.enqueue(new Callback<List<Repo>>() {
+            @Override
+            public void onResponse(Call<List<Repo>> call, Response<List<Repo>> response) {
+                System.out.println(response.body());
+            }
 
+            @Override
+            public void onFailure(Call<List<Repo>> call, Throwable t) {
+
+            }
+        });
     }
 
-
-    @Override
-    public void onSelect(Planet planet) {
-        Intent intent = new Intent(this, PlanetActivity.class);
-        intent.putExtra("title", planet.getName());
-        intent.putExtra("desc", planet.getDescription());
-        intent.putExtra("img", planet.getImage());
-        startActivity(intent);
-    }
-
-    @Override
-    public void onShare(Planet planet) {
-        Toast.makeText(this, "Toast", Toast.LENGTH_SHORT).show();
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT, planet.getImage());
-        sendIntent.setType("text/plain");
-        startActivity(sendIntent);
+    public void showAlert(View v){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Bonjour ?")
+                .setPositiveButton("Ooké", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        builder.setTitle("Question");
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

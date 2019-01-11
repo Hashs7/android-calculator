@@ -80,7 +80,6 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetAdapter.MyViewHold
                     listener.onShare(planet);
                 }
             });
-
         }
     }
 }
