@@ -24,6 +24,9 @@ public class News {
     @ColumnInfo(name = "news_description")
     private String description;
 
+    @ColumnInfo(name = "news_like")
+    private Boolean like = false;
+
     public int getId() {
         return id;
     }
@@ -72,6 +75,14 @@ public class News {
         this.description = description;
     }
 
+    public Boolean getLike() {
+        return like;
+    }
+
+    public void setLike(Boolean like) {
+        this.like = like;
+    }
+
     @Override
     public String toString() {
         return "News{" +
@@ -81,6 +92,7 @@ public class News {
                 ", publishedAt='" + publishedAt + '\'' +
                 ", urlToImage='" + urlToImage + '\'' +
                 ", description='" + description + '\'' +
+                ", like=" + like +
                 '}';
     }
 }

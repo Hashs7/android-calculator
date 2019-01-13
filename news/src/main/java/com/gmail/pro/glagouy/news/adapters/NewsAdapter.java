@@ -7,10 +7,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gmail.pro.glagouy.news.R;
+import com.gmail.pro.glagouy.news.listeners.NewsListener;
 import com.gmail.pro.glagouy.news.models.News;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -18,13 +18,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
     private List<News> news;
+    private NewsListener listener;
 
     public void setNews(List<News> news) {
         this.news = news;
     }
 
-    public NewsAdapter(List<News> news) {
+    public NewsAdapter(List<News> news, NewsListener listener) {
         this.news = news;
+        this.listener = listener;
     }
 
     @NonNull
@@ -51,6 +53,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
         TextView mPublished;
         ImageView mImage;
         TextView mDesc;
+        ImageView mLike;
         View v;
 
         public MyViewHolder(@NonNull View v) {
@@ -61,6 +64,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
             mPublished = v.findViewById(R.id.tv_publish);
             mImage = v.findViewById(R.id.iv_image);
             mDesc = v.findViewById(R.id.tv_desc);
+            mLike = v.findViewById(R.id.like);
         }
 
         void bindItem(final News news){
@@ -69,6 +73,25 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
             mPublished.setText(news.getPublishedAt());
             Picasso.get().load(news.getUrlToImage()).into(mImage);
             mDesc.setText(news.getDescription());
+
+            if(news.getLike()){
+                mLike.setBackgroundResource(R.drawable.ic_thumb_up_blue_24dp);
+            }
+
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onSelect(news);
+                }
+            });
+
+            mLike.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    news.setLike(true);
+                    listener.onLike(news);
+                }
+            });
         }
     }
 }
