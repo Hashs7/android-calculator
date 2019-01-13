@@ -8,6 +8,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 @Dao
 public interface NewsDao {
@@ -28,5 +29,8 @@ public interface NewsDao {
 
     @Delete
     void delete(News news);
+
+    @Update
+    void update(News news);
 
 }

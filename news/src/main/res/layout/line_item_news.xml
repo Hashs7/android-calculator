@@ -15,7 +15,7 @@
 
         <TextView
             android:id="@+id/tv_title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:textSize="30sp"
             app:layout_constraintTop_toTopOf="parent"
@@ -49,10 +49,14 @@
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/iv_image"
             tools:text="Non magnam sunt a provident. Sit inventore eius nulla saepe autem porro. Ut suscipit id expedita voluptatibus et delectus minima. Est et vero sequi est quo ex nemo. Quod animi at est."/>
-        
 
+        <ImageView
+            android:id="@+id/like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_thumb_up_grey_24dp"
+            app:layout_constraintTop_toBottomOf="@+id/tv_desc"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 </androidx.cardview.widget.CardView>
