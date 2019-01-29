@@ -1,33 +1,40 @@
 package com.pro.glagouy.calculatriceandroid.modeles;
 
+import android.util.Log;
+
+/**
+ * Calcule le résultat à chaque nouveau opérateur
+ */
 public class Operation {
-    private Double val1;
-    private Double val2;
+    private Double firstValue;
+    private Double lastValue;
     private String operator;
 
-    public Operation(Double val1, Double val2, String operator) {
-        this.val1 = val1;
-        this.val2 = val2;
+    public Operation(Double firstValue, Double lastValue, String operator) {
+        this.firstValue = firstValue;
+        this.lastValue = lastValue;
         this.operator = operator;
     }
 
     public Double calculate() throws Exception {
         if(operator != null){
-            System.out.println("Il y a un opérateur");
+            Log.w("WARN","Il y a un opérateur");
         }
+
+        if(firstValue == null || lastValue == null) return null;
 
         switch (operator) {
             case "/":
-                if (val2 == 0) {
+                if (lastValue == 0) {
                     throw new Exception("Division par 0 impossible !");
                 }
-                return val1 / val2;
+                return firstValue / lastValue;
             case "*":
-                return val1 * val2;
+                return firstValue * lastValue;
             case "-":
-                return val1 - val2;
+                return firstValue - lastValue;
             case "+":
-                return val1 + val2;
+                return firstValue + lastValue;
         }
         return 0.0;
     }
