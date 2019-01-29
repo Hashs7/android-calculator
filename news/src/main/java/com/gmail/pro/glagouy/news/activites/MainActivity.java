@@ -4,12 +4,16 @@ import android.os.Bundle;
 
 import com.gmail.pro.glagouy.news.R;
 import com.gmail.pro.glagouy.news.databases.DatabaseHelper;
-import com.gmail.pro.glagouy.news.databases.NetworkHelper;
+import com.gmail.pro.glagouy.news.networks.NetworkHelper;
 import com.gmail.pro.glagouy.news.fragments.NewsFragment;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
+/**
+ * Activité principale de la vue
+ * Lors de la création -> Initialise les données
+ */
 public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
         transaction.replace(R.id.fragment_container, fragment);
         transaction.addToBackStack(null);
-
         transaction.commit();
-
     }
 }

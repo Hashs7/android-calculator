@@ -1,7 +1,7 @@
 package com.gmail.pro.glagouy.news.viewmodels;
 
 import com.gmail.pro.glagouy.news.databases.DatabaseHelper;
-import com.gmail.pro.glagouy.news.databases.NetworkHelper;
+import com.gmail.pro.glagouy.news.networks.NetworkHelper;
 import com.gmail.pro.glagouy.news.models.News;
 import com.gmail.pro.glagouy.news.models.NewsList;
 import com.gmail.pro.glagouy.news.networks.NewsService;
@@ -22,6 +22,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/** TODO
+ * Commenter
+ */
 public class NewsViewModel extends ViewModel {
     private MutableLiveData<List<News>> newsLiveData;
     private MutableLiveData<News> selected = new MutableLiveData<>();
@@ -38,6 +41,10 @@ public class NewsViewModel extends ViewModel {
         return newsLiveData;
     }
 
+    /**
+     * @eamosse - Tu pourrais initialiser Retrofit dans NetworkHelper en variable statique
+     * ainsi tu pourrais utiliser la meme instance pour faire tous tes appels
+     */
     private void loadNews(){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Constants.getUrl())

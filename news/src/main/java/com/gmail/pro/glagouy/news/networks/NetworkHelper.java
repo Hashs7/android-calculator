@@ -1,9 +1,12 @@
-package com.gmail.pro.glagouy.news.databases;
+package com.gmail.pro.glagouy.news.networks;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+/**
+ * TODO attention aux warnings
+ */
 public class NetworkHelper {
     private static boolean isConnected;
 

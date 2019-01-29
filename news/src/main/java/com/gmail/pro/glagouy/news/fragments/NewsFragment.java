@@ -24,6 +24,9 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ *
+ */
 public class NewsFragment extends Fragment implements NewsListener {
     private List<News> newsList;
     View rootView;
@@ -46,6 +49,19 @@ public class NewsFragment extends Fragment implements NewsListener {
         return rootView;
     }
 
+    /** TODO
+     * il est préférable d'observer la liste des articles avec getViewLifecycleOwner() au lieu de this
+     * pourquoi?
+     * en this faire référence au fragment qui ne se détruit pas tout de suite et par conséquent
+     * tu continues d'obsrver les changements sur cette liste même quand la vue est détruite
+     * par contre, si ton tu observes avec getViewLifecycleOwner(), quand la vue est détruite
+     * comme par exemple, lors d'un changement de frgment, ton fragment arrête d'observer les
+     * changements sur ce livedata.
+     * Alors, à quel moment faut-il observer avec this ou avec getViewLifecycleOwner()??
+     * La réponse est simple:
+     * 1. si les changments nécessitent de modifier la vue, utilise getViewLifecycleOwner()
+     * 2. sinon, utilise this
+     */
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -82,10 +98,5 @@ public class NewsFragment extends Fragment implements NewsListener {
     @Override
     public void onLike(News news) {
         this.model.updateOneNews(news);
-    }
-
-    @Override
-    public void onShare(News news) {
-
     }
 }

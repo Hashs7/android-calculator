@@ -16,6 +16,12 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * L'adapteur récupère les données
+ * et les formattent pour l'adapter à la vue
+ *
+ * TODO Attention aux warnings
+ */
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
     private List<News> news;
     private NewsListener listener;
@@ -48,13 +54,13 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView mTitle;
-        TextView mAuthor;
-        TextView mPublished;
-        ImageView mImage;
-        TextView mDesc;
-        ImageView mLike;
-        View v;
+        private TextView mTitle;
+        private TextView mAuthor;
+        private TextView mPublished;
+        private ImageView mImage;
+        private TextView mDesc;
+        private ImageView mLike;
+        private View v;
 
         public MyViewHolder(@NonNull View v) {
             super(v);
@@ -76,6 +82,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
 
             if(news.getLike()){
                 mLike.setBackgroundResource(R.drawable.ic_thumb_up_blue_24dp);
+            } else {
+                mLike.setBackgroundResource(R.drawable.ic_thumb_up_grey_24dp);
             }
 
             v.setOnClickListener(new View.OnClickListener() {
@@ -86,6 +94,11 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.MyViewHolder>{
             });
 
             mLike.setOnClickListener(new View.OnClickListener() {
+
+                /** TODO
+                 * @eamosse tu devrais fexecuter cette opération dans le listener
+                 * et notifier l'adapter pour changer l'apparence du bouton
+                 */
                 @Override
                 public void onClick(View v) {
                     news.setLike(true);

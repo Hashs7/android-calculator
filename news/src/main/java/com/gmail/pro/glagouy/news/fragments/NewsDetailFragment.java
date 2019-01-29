@@ -20,14 +20,18 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+/**
+ * Affichage de la vue complète de la news
+ * Apparait au touch de la news
+ */
 public class NewsDetailFragment extends Fragment {
     private View rootView;
     private NewsViewModel model;
-    ImageView imageView;
-    TextView textViewTitle;
-    TextView textViewAuthor;
-    TextView textViewPublished;
-    TextView textViewDescription;
+    private ImageView imageView;
+    private TextView textViewTitle;
+    private TextView textViewAuthor;
+    private TextView textViewPublished;
+    private TextView textViewDescription;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,6 +53,10 @@ public class NewsDetailFragment extends Fragment {
         return rootView;
     }
 
+    /** TODO
+     * @eamosse - voir mon commentaire sur les observers
+     * @param savedInstanceState
+     */
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -62,7 +70,5 @@ public class NewsDetailFragment extends Fragment {
                 textViewDescription.setText(news.getDescription());
             }
         });
-
-
     }
 }
