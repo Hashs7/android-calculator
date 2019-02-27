@@ -4,14 +4,15 @@ Gobelins Project - Android applications - Calculator and newsfeed
 
 ## Installing
 
-Installing project :
+Pour installer le projet, ouvrez un terminal et exécutez ces commandes :
 
+    cd AndroidStudioProjects
+    
     git clone git@github.com:Hashs7/android-calculator.git
     
-    cd android-calculator
 
 ## Project infos
 
-These apps were build with [Guillaume Lagouy](https://github.com/GuillaumeLagouy/)
+Ce projet a été développé en collaboration avec [Guillaume Lagouy](https://github.com/GuillaumeLagouy/android-calculator)
 
 ## Video demo
