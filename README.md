@@ -1,8 +1,8 @@
 # android-calculator
-Gobelins Project - Android applications - Calculator and newsfeed
+Projet Gobelins - Android applications - Calculator and newsfeed
 
 
-## Installing
+## Installatopn
 
 Pour installer le projet, ouvrez un terminal et exécutez ces commandes :
 
@@ -11,7 +11,7 @@ Pour installer le projet, ouvrez un terminal et exécutez ces commandes :
     git clone git@github.com:Hashs7/android-calculator.git
     
 
-## Project infos
+## Projet infos
 
 Ce projet a été développé en collaboration avec [Guillaume Lagouy](https://github.com/GuillaumeLagouy/android-calculator)
 
