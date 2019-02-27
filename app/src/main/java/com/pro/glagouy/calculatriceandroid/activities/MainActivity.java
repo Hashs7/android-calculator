@@ -1,6 +1,7 @@
 package com.pro.glagouy.calculatriceandroid.activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,17 +55,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     *
+     * On touch egal
      * @param view
      */
     public void calculate(View view) {
+        Log.w("WARN", "clikaaay");
+        if(this.displayValue == null) return;
+        if(this.operator == null) return;
         String[] values = this.displayValue.split(String.format("\\%s", this.operator));
+        Log.w("WARN", this.operator);
+        if(values[0] == null) return;
+        if(values[1] == null) return;
         this.firstValue = Double.parseDouble(values[0]);
+        Log.w("WARN", String.valueOf(this.firstValue));
         this.lastValue = Double.parseDouble(values[1]);
+        Log.w("WARN", String.valueOf(this.lastValue));
 
         Double result;
         try {
-            result = new Operation(this.firstValue, this.lastValue, operator).calculate();
+            result = new Operation(this.firstValue, this.lastValue, this.operator).calculate();
             this.displayValue = result.toString();
             updateView();
         } catch (Exception e) {

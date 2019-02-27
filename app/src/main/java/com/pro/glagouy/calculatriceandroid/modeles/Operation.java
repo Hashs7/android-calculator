@@ -17,11 +17,13 @@ public class Operation {
     }
 
     public Double calculate() throws Exception {
-        if(operator != null){
-            Log.w("WARN","Il y a un opérateur");
+
+        if(operator == null ) {
+            Log.w("WARN","Il y aucun un opérateur !");
+            throw new Exception("Il y aucun un opérateur !");
         }
 
-        if(firstValue == null || lastValue == null) return null;
+        if(firstValue == null || lastValue == null) return 0.0;
 
         switch (operator) {
             case "/":

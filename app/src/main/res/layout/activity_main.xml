@@ -22,17 +22,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="test"/>
 
-    <ImageView
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/ic_access_time_black_40dp"
-        android:layout_margin="10dp"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:contentDescription="history">
-
-    </ImageView>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_interface"
         android:layout_width="match_parent"
@@ -157,16 +146,16 @@
 
 
             <Button
-                style="@style/button"
                 android:id="@+id/buttonComma"
-                android:text=","
-                android:tag=","
+                style="@style/button"
                 android:onClick="inputClick"
-                app:layout_constraintHeight_percent="0.25"
+                android:tag="."
+                android:text=","
                 app:layout_constraintEnd_toStartOf="@+id/button0"
-                app:layout_constraintTop_toBottomOf="@+id/button1"
+                app:layout_constraintHeight_percent="0.25"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintHorizontal_bias="0.5" />
+                app:layout_constraintTop_toBottomOf="@+id/button1" />
 
             <Button
                 style="@style/button"
