@@ -16,3 +16,4 @@ Pour installer le projet, ouvrez un terminal et exécutez ces commandes :
 Ce projet a été développé en collaboration avec [Guillaume Lagouy](https://github.com/GuillaumeLagouy/android-calculator)
 
 ## Video demo
+![Video demo](https://s2.gifyu.com/images/calculator.gif)
